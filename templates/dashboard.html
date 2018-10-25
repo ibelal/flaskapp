@@ -1,0 +1,73 @@
+{% extends 'layout.html' %}
+{% block body %}
+	<div class="starter-template">
+        <h1>Dashboard <small>Welcome {{session.username}} </small> </h1>
+        <a href="/add_article" class="btn btn-success float-right " > Add Article </a>
+        <div class="clearfix" ></div>	
+        <hr>
+
+        <table class="table table-hover" >
+        	<caption>List of Articles </caption>
+        	<thead>
+        		<tr>
+        			<th>#</th>
+        			<th>Title</th>
+        			<th>Author</th>
+        			<th>Date</th>
+        			<th>Edit</th>
+        			<th>Delete</th>
+        		</tr>
+        	</thead>
+
+        	<tbody>
+        		{% for article in articles %}
+        		<tr>
+        			<td>{{article.id}}</td>
+        			<td>{{article.title}}</td>
+        			<td>{{article.author}}</td>
+        			<td>{{article.created_time.strftime('%b %d, %Y')}}</td>
+        			<td><a href="/edit_article/{{article.id}}" class="btn btn-primary" >Edit</a></td>
+        			<td>        				
+        				<a href="#" data-href="/delete_article/{{article.id}}" data-toggle="modal" data-target="#confirm-delete"  class="btn btn-danger" > Delete </a>
+        			</td>
+        		</tr>
+        		{% endfor %}
+        	</tbody>
+        </table>        
+	</div>
+
+	<div id="confirm-delete" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+	  <div class="modal-dialog modal-dialog-centered" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h6 class="modal-title">Alert</h6>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	        <p>Are you sure want to delete this article?</p>
+	      </div>
+	      <div class="modal-footer">	        
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	        <button type="button" class="btn btn-danger btn-ok">Delete</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+{% endblock %}
+
+{% block js %}
+	<script type="text/javascript" >
+		$('#confirm-delete').on('show.bs.modal', function(e) {
+		  	var url = $(e.relatedTarget).data('href');
+
+			$('#confirm-delete').on('click', '.btn-ok', function(e) {
+				$(location).attr('href', url);
+			});
+		  
+		});	
+	</script>
+
+{% endblock %}
