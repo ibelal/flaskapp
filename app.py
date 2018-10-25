@@ -19,11 +19,6 @@ app.config["MYSQL_PASSWORD"] = ''
 # app.config["MYSQL_PORT"] = ''
 app.config["MYSQL_DB"] = 'flaskapp'
 
-# app.config["MYSQL_HOST"] = 'localhost'
-# app.config["MYSQL_USER"] = 'sushnzqq_demo' #'root'
-# app.config["MYSQL_PASSWORD"] = 'demo@123456' # ''
-# # app.config["MYSQL_PORT"] = ''
-# app.config["MYSQL_DB"] = 'sushnzqq_demo' #'flaskapp'
 
 
 app.config["MYSQL_CURSORCLASS"] = 'DictCursor'
